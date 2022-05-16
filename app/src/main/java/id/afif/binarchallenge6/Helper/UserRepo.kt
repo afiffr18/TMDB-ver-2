@@ -34,7 +34,4 @@ class UserRepo(context: Context) {
 
     suspend fun getMovieDetail(movieId : Int,key : String) = tmdbService.getMovieDetail(movieId, key)
 
-
-
-
 }

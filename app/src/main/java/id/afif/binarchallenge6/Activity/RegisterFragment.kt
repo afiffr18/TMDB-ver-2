@@ -49,7 +49,7 @@ class RegisterFragment : Fragment() {
             val email = binding.etEmail.text.toString()
             val password = binding.etPassword.text.toString()
             if(isAllFieldChecked(username,email,password)){
-                val data = User(null,username,email,password,"default","12/12/12","defulat")
+                val data = User(null,username,email,password,"","12/12/12","")
                 moviesViewModel.saveToDb(data)
                 findNavController().popBackStack()
             }else{
