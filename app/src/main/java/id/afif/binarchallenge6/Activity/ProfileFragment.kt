@@ -105,7 +105,7 @@ class ProfileFragment : Fragment() {
         }
     }
     private fun checkingPermissions() {
-        // apakah permission sudah di setujui atau belum
+        // melakukan pengecekan apakah permission sudah di setujui atau belum
         if (isGranted(
                 requireActivity(),
                 Manifest.permission.CAMERA,
@@ -129,11 +129,11 @@ class ProfileFragment : Fragment() {
     ): Boolean {
         val permissionCheck = ActivityCompat.checkSelfPermission(activity, permission)
         return if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
-            // klau udah di tolak sebelumnya
+            // Jika sudah pernah ditolak sebelumya
             if (ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)) {
                 showPermissionDeniedDialog()
             }
-            // klau belum pernah di tolak (request pertama kali)
+            // jika belum pernah di tolak / request pertama kali
             else {
                 ActivityCompat.requestPermissions(activity, permissions, request)
             }
@@ -143,7 +143,7 @@ class ProfileFragment : Fragment() {
         }
     }
 
-    // dialoag yg muncul kalau user menolak permission yg di butuhkan
+    // dialog yang muncul kalau user menolak permission yg di butuhkan
     private fun showPermissionDeniedDialog() {
         AlertDialog.Builder(requireContext())
             .setTitle("Permission Denied")
@@ -202,7 +202,7 @@ class ProfileFragment : Fragment() {
             }
         }
 
-    // buat open camera
+
     private fun openCamera() {
         val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         cameraResult.launch(cameraIntent)
