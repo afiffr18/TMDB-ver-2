@@ -1,16 +1,14 @@
 package id.afif.binarchallenge6.Activity
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import id.afif.binarchallenge6.API.TMDBClient
-import id.afif.binarchallenge6.API.TMDBService
 import id.afif.binarchallenge6.Adapter.MoviesAdapter
 import id.afif.binarchallenge6.Helper.DataStoreManager
 import id.afif.binarchallenge6.Helper.UserRepo
@@ -49,7 +47,6 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecycler()
-
         getDataFromNetwork()
         setUsernameLogin()
         profileClicked()
@@ -86,15 +83,22 @@ class HomeFragment : Fragment() {
                 }
 
             }
-
         }
     }
 
 
-    private fun setUsernameLogin(){
-        userViewModel.getUserLogin().observe(viewLifecycleOwner){
-            binding.tvUserLogin.text = "welcome : ${it[0]}"
+    private fun setUsernameLogin() {
+        userViewModel.getUserLogin().observe(viewLifecycleOwner) {
+            viewModel.getDataById(it[0], it[1])
         }
+        viewModel.dataUser.observe(viewLifecycleOwner) {
+            binding.tvUserLogin.text = "welcome : ${it.username}"
+            it.id?.let { it1 ->
+                userViewModel.saveId(it1)
+            }
+        }
+
+
     }
 
     private fun profileClicked(){
